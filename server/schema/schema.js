@@ -4,7 +4,8 @@ const _=require('lodash');
 
 const {GraphQLString,GraphQLObjectType,GraphQLSchema, 
     GraphQLID,
-    GraphQLInt
+    GraphQLInt,
+    GraphQLList
 }=graphql;
 
 //dumy data
@@ -47,6 +48,12 @@ const AuthorType=new GraphQLObjectType({
         id:{type:GraphQLID},
         name:{type:GraphQLString},
         age:{type:GraphQLInt},
+        books:{
+            type:new GraphQLList(BookType),
+            resolve(parent,args){
+                return _.filter(books,{authorId:parent.id})
+            }
+        }
     })
 });
 
@@ -67,6 +74,18 @@ const RootQuery=new GraphQLObjectType({
             resolve(parent,args){
                 //code to get data from db or an other source
                return _.find(authors,{id:args.id})
+            }
+        },
+        books:{
+            type:new GraphQLList(BookType),
+            resolve(parent,args){
+                return books
+            }
+        },
+        authors:{
+            type:new GraphQLList(AuthorType),
+            resolve(parent,args){
+                return authors
             }
         }
     }
