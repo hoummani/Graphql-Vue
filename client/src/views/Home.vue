@@ -1,17 +1,27 @@
 <template>
   <div class="home">
-    <HelloWorld/>
+    <h2>GraphQl Implementation with Vue</h2>
+    <div>
+      <BookList/>
+    </div>
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
-import HelloWorld from "@/components/HelloWorld.vue";
+import BookList from '@/components/BookList';
 
 export default {
   name: "home",
-  components: {
-    HelloWorld
+  components:{
+    BookList
   }
 };
 </script>
+<style lang="scss" scoped>
+.home{
+  background: #eeeeee;
+  font-family: 'Courier New', Courier, monospace;
+}
+</style>
+
